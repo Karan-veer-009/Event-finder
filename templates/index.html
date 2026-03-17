@@ -51,6 +51,9 @@
                     `
                 })
             })
+            .catch(error => {
+                document.getElementById("loading").innerHTML = "Error: " + error.message
+            })
     </script>
 </body>
 </html>
