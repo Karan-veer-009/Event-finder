@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+import anthropic
 
 load_dotenv()
 
@@ -31,8 +32,23 @@ def get_victoria_events():
     
     return events
 
+def summarize_event(event):
+    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+    
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=100,
+        messages=[{"role": "user", "content": f"Summarize this event in exactly 2 short sentences for a university student. Make it sound fun and relevant. Event: {event['title']} on {event['date']}. Details: {event['description']}"}]
+    )
+    
+    return response.content[0].text
 if __name__ == "__main__":
     events = get_victoria_events()
     print(f"Found {len(events)} events")
-    for e in events:
-        print(e["title"], "-", e["date"])
+
+    for e in events[:3]:
+        print("Event:", e["title"])
+        print("Date:", e["date"])
+        summary = summarize_event(e)
+        print("AI Summary:", summary)
+        print("---")
