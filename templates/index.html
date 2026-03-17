@@ -34,7 +34,7 @@
     <div id="events-container"></div>
 
     <script>
-        fetch("/api/events")
+        fetch("https://victoria-event-finder-production.up.railway.app/api/events")
             .then(response => response.json())
             .then(events => {
                 document.getElementById("loading").style.display = "none";
