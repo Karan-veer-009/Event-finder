@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, render_template
 from scraper import get_victoria_events, summarize_event
 
@@ -20,4 +21,5 @@ def events():
     return jsonify(summarized)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
