@@ -34,7 +34,7 @@
     <div id="events-container"></div>
 
     <script>
-        fetch("https://victoria-event-finder-production.up.railway.app/api/events")
+        fetch("https://victoria-event-finder-production.up.railway.app/api/events", {signal: AbortSignal.timeout(60000)})
             .then(response => response.json())
             .then(events => {
                 document.getElementById("loading").style.display = "none";

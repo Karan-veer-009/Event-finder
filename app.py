@@ -14,7 +14,7 @@ def events():
     raw_events = get_victoria_events()
 
     summarized=[]
-    for event in raw_events[:6]:
+    for event in raw_events[:3]:
         event["summary"] = summarize_event(event)
         summarized.append(event)
 
